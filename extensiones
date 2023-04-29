@@ -1,0 +1,121 @@
+<?php
+var_dump($_GET);
+/*
+require('fpdf.php');
+setlocale(LC_ALL, 'es_ES');
+require '../../model/usuarios.modelo.php';
+
+class PDF extends FPDF
+{
+    // Cabecera de página
+    function Header()
+    {
+        $this->Image('img/Imagen2.png', 0, 18, 60, 'PNG');
+        // Arial bold 15
+        $this->SetFont('Arial', 'B', 15);
+        // Movernos a la derecha
+        // Título
+        $this->Ln(10);
+        $this->Cell(190, 5, utf8_decode('SISTEMA DE ADMINISTRACIÓN CLÍNICA'), 0, 1, 'C');
+        $this->SetFont('Arial', '', 8);
+        $this->Cell(190, 5, utf8_decode('And. Ceres # 127 Col. Popular Anaya 37240 León, Gto.'), 0, 1, 'C');
+        $this->Cell(190, 5, utf8_decode('Teléfono: +52 477 513 2451'), 0, 1, 'C');
+        $this->Cell(190, 5, utf8_decode('Email: samuelgr@grclinicadental.com.mx'), 0, 1, 'C');
+        // FECHA
+        $this->Ln(20);
+        $this->Cell(20, 5, utf8_decode('FECHA'), 0, 0, 'L');
+        $this->Cell(170, 5, utf8_decode(strftime("Hoy es %A día %d de %Y")), 0, 1, 'L');
+        // Datos
+        $this->Ln(5);
+        $this->SetFillColor(10, 70, 97); //Fondo verde de celda
+        $this->SetTextColor(240, 255, 240); //Letra color blanco
+        $this->SetFont('Arial', 'B', 12);
+        $this->Cell(190, 8, utf8_decode('IMFORME DE CITA'), 1, 1, 'C', true);
+        $this->SetTextColor(0, 0, 0); //Fondo verde de celda
+        
+        
+        $response = $this->getData();
+        // var_dump($response);
+        // >
+        $this->SetFont('Arial', 'B', 8);
+        $this->Cell(5, 8, '', 0, 0, 'L');
+        $this->Cell(20, 8, utf8_decode('FOLIO : '), 0, 0, 'L');
+        $this->SetFont('Arial', '', 8);
+        $this->Cell(65, 8, utf8_decode($response['folio_cita']), 0, 0, 'L');
+          // <
+        $this->SetFont('Arial', 'B', 8);
+        $this->Cell(5, 8, '', 0, 0, 'L');
+        $this->Cell(20, 8, utf8_decode('DÍA : '), 0, 0, 'L');
+        $this->SetFont('Arial', '', 8);
+        $this->Cell(65, 8, utf8_decode($response['fechaProgramada_cita']), 0, 1, 'L');
+
+        // >
+        $this->SetFont('Arial', 'B', 8);
+        $this->Cell(5, 8, '', 0, 0, 'L');
+        $this->Cell(20, 8, utf8_decode('PACIENTE : '), 0, 0, 'L');
+        $this->SetFont('Arial', '', 8);
+        $this->Cell(65, 8, utf8_decode($response['nombre_paciente']), 0, 0, 'L');
+
+        // <
+        $this->SetFont('Arial', 'B', 8);
+        $this->Cell(5, 8, '', 0, 0, 'L');
+        $this->Cell(20, 8, utf8_decode('CORREO : '), 0, 0, 'L');
+        $this->SetFont('Arial', '', 8);
+        $this->Cell(65, 8, utf8_decode($response['correo_paciente']), 0, 1, 'L');
+
+        // >
+        $this->SetFont('Arial', 'B', 8);
+        $this->Cell(5, 8, '', 0, 0, 'L');
+        $this->Cell(20, 8, utf8_decode('TELEFONO : '), 0, 0, 'L');
+        $this->SetFont('Arial', '', 8);
+        $this->Cell(65, 8, utf8_decode($response['telefono_paciente']), 0, 0, 'L');
+
+        // <
+        $this->SetFont('Arial', 'B', 8);
+        $this->Cell(5, 8, '', 0, 0, 'L');
+        $this->Cell(20, 8, utf8_decode('DIRECCIÓN : '), 0, 0, 'L');
+        $this->SetFont('Arial', '', 8);
+        $this->Cell(65, 8, utf8_decode($response['domicilio_paciente']), 0, 1, 'L');
+
+
+        // >
+        $this->SetFont('Arial', 'B', 8);
+        $this->Cell(5, 8, '', 0, 0, 'L');
+        $this->Cell(20, 8, utf8_decode('INCIO : '), 0, 0, 'L');
+        $this->SetFont('Arial', '', 8);
+        $this->Cell(65, 8, utf8_decode($response['horaInicio_cita']), 0, 0, 'L');
+
+        // <
+        $this->SetFont('Arial', 'B', 8);
+        $this->Cell(5, 8, '', 0, 0, 'L');
+        $this->Cell(20, 8, utf8_decode('FIN : '), 0, 0, 'L');
+        $this->SetFont('Arial', '', 8);
+        $this->Cell(65, 8, utf8_decode($response['horaFin_cita']), 0, 1, 'L');
+
+
+        $this->SetFont('Arial', 'IB', 10);
+        $this->Ln(10);
+        $this->Cell(190, 5, utf8_decode('¡Gracias por su preferencia!'), 0, 1, 'C');
+
+    }
+    
+      function getData()
+    {
+        $smtp = Conexion::conectar()->prepare("SELECT T1.*, T1.folio_cita, T2.correo_paciente, T2.telefono_paciente, T2.domicilio_paciente, CONCAT_WS(' ', T2.nombre_paciente, T2.apaterno_paciente, T3.amaterno_medico) AS nombre_paciente, CONCAT_WS(' ', T3.nombre_medico, T3.apaterno_medico, T3.amaterno_medico) AS nombre_medico
+        FROM tbl_citas T1
+        INNER JOIN tbl_pacientes T2 ON T1.id_paciente = T2.id_paciente
+        INNER JOIN tbl_medicos T3 ON T1.id_medico = T3.id_medico 
+            WHERE T1.folio_cita = '$_GET[folio_cita]'");
+
+        $smtp->execute();
+        $respuesta = $smtp->fetch();
+
+        return $respuesta;
+    }
+    
+}
+
+$pdf = new PDF();
+$pdf->AddPage();
+$pdf->Output();
+*/

@@ -1,0 +1,59 @@
+Options All -Indexes
+
+RewriteEngine On
+
+RewriteRule ^controller/usuarios/([0-9]+)$ controller/usuarios.php?id_usuario=$1
+RewriteRule ^controller/usuarios$ controller/usuarios.php
+
+RewriteRule ^controller/users/([0-9]+)$ controller/users.php?id_usuario=$1
+RewriteRule ^controller/users$ controller/users.php
+
+RewriteRule ^controller/update-field/([0-9]+)$ controller/update-field.php
+RewriteRule ^controller/update-field$ controller/update-field.php
+
+RewriteRule ^controller/servicios/([0-9]+)$ controller/servicios.php?id_servicio=$1
+RewriteRule ^controller/servicios$ controller/servicios.php
+
+RewriteRule ^controller/paquetes/([0-9]+)$ controller/paquetes.php?id_paquete=$1
+RewriteRule ^controller/paquetes$ controller/paquetes.php
+
+RewriteRule ^controller/pagos/([0-9]+)$ controller/pagos.php?id_pago=$1
+RewriteRule ^controller/pagos$ controller/pagos.php
+
+RewriteRule ^controller/pago-detalle/([0-9]+)$ controller/pago-detalle.php?id_pago_detalle=$1
+RewriteRule ^controller/pago-detalle$ controller/pago-detalle.php
+
+RewriteRule ^controller/pago-abono/([0-9]+)$ controller/pago-abono.php?id_pago_abono=$1
+RewriteRule ^controller/pago-abono$ controller/pago-abono.php
+
+RewriteRule ^controller/pacientes/([0-9]+)$ controller/pacientes.php?id_paciente=$1
+RewriteRule ^controller/pacientes$ controller/pacientes.php
+
+RewriteRule ^controller/medicos/([0-9]+)$ controller/medicos.php?id_medico=$1
+RewriteRule ^controller/medicos$ controller/medicos.php
+
+RewriteRule ^controller/inicio/([0-9]+)$ controller/inicio.php
+RewriteRule ^controller/inicio$ controller/inicio.php
+
+RewriteRule ^controller/historial-paciente/([0-9]+)$ controller/historial-paciente.php?id_paciente=$1
+RewriteRule ^controller/historial-paciente$ controller/historial-paciente.php
+
+RewriteRule ^controller/historial-medico/([0-9]+)$ controller/historial-medico.php?id_medico=$1
+RewriteRule ^controller/historial-medico$ controller/historial-medico.php
+
+RewriteRule ^controller/factura/([0-9]+)$ controller/factura.php?folio=$1
+RewriteRule ^controller/factura$ controller/factura.php
+
+RewriteRule ^controller/especialidades/([0-9]+)$ controller/especialidades.php?id_especialidad=$1
+RewriteRule ^controller/especialidades$ controller/especialidades.php
+
+RewriteRule ^controller/calendar/([0-9]+)$ controller/calendar.php?id_usuario=$1
+RewriteRule ^controller/calendar$ controller/calendar.php
+
+RewriteRule ^controller/citas/([0-9]+)$ controller/citas.php?id_cita=$1
+RewriteRule ^controller/citas$ controller/citas.php
+
+RewriteRule ^controller/buscador/([0-9]+)$ controller/buscador.php?id_usuario=$1
+RewriteRule ^controller/buscador$ controller/buscador.php
+
+RewriteRule ^controller/login$ controller/login.phpapi/.htaccess

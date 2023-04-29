@@ -1,0 +1,7 @@
+[16-Apr-2023 14:32:50 America/Mexico_City] PHP Fatal error:  Uncaught Exception: FPDF error: Some data has already been output, can't send PDF file (output started at /home3/grclinic/sac.grclinicadental.com.mx/extenciones/fpdf/generar-pdf.php:38) in /home3/grclinic/sac.grclinicadental.com.mx/extenciones/fpdf/fpdf.php:271
+Stack trace:
+#0 /home3/grclinic/sac.grclinicadental.com.mx/extenciones/fpdf/fpdf.php(1049): FPDF->Error('Some data has a...')
+#1 /home3/grclinic/sac.grclinicadental.com.mx/extenciones/fpdf/fpdf.php(999): FPDF->_checkoutput()
+#2 /home3/grclinic/sac.grclinicadental.com.mx/extenciones/fpdf/generar-pdf.php(120): FPDF->Output()
+#3 {main}
+  thrown in /home3/grclinic/sac.grclinicadental.com.mx/extenciones/fpdf/fpdf.php on line 271

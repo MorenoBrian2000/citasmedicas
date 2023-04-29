@@ -1,0 +1,29 @@
+.capa {
+    border: 1px solid #cdcdcd;
+}
+
+.capa li {
+    list-style: none;
+    padding-left: 10px;
+}
+
+.seleccionado {
+    color: #2C3495;
+    font-weight: bold;
+}
+
+.capaModelo {
+    border-collapse: expression("separate", cellSpacing="5px");
+}
+
+thead, tr, th {
+    border-collapse: expression("separate", cellSpacing="5px");
+}
+
+.file-field.medium .file-path-wrapper {
+    height: 3rem;
+}
+
+.file-field.medium .file-path-wrapper .file-path {
+    height: 2.8rem;
+}
